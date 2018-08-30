@@ -55,6 +55,7 @@ Train Epoch: 2 [30000/60000 (50%)]	Loss: 97.522675
 Train Epoch: 2 [40000/60000 (67%)]	Loss: 89.119591
 Train Epoch: 2 [50000/60000 (83%)]	Loss: 82.446091
 ====> Epoch: 2 Average loss: 92.7768
+====> Test set loss: 80.5508
 ```
 
 
