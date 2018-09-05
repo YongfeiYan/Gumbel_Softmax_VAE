@@ -121,8 +121,8 @@ optimizer = optim.Adam(model.parameters(), lr=1e-3)
 def loss_function(recon_x, x, qy):
     BCE = F.binary_cross_entropy(recon_x, x.view(-1, 784), size_average=False) / x.shape[0]
 
-    log_qy = torch.log(qy + 1e-20)
-    KLD = torch.sum(qy * (log_qy - 1. / categorical_dim), dim=-1).mean()
+    log_ratio = torch.log(qy * categorical_dim + 1e-20)
+    KLD = torch.sum(qy * log_ratio, dim=-1).mean()
 
     return BCE + KLD
 
