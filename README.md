@@ -40,21 +40,30 @@ Better training accuracy and sample image quality were obtained.
 ### Training output
 
 ```bash
-Train Epoch: 1 [0/60000 (0%)]	Loss: 542.612183
-Train Epoch: 1 [10000/60000 (17%)]	Loss: 209.495697
-Train Epoch: 1 [20000/60000 (33%)]	Loss: 188.947800
-Train Epoch: 1 [30000/60000 (50%)]	Loss: 195.400696
-Train Epoch: 1 [40000/60000 (67%)]	Loss: 189.618195
-Train Epoch: 1 [50000/60000 (83%)]	Loss: 190.018005
-====> Epoch: 1 Average loss: 199.9627
-====> Test set loss: 182.4984
-Train Epoch: 2 [0/60000 (0%)]	Loss: 181.569107
-Train Epoch: 2 [10000/60000 (17%)]	Loss: 174.215042
-Train Epoch: 2 [20000/60000 (33%)]	Loss: 169.722961
-Train Epoch: 2 [30000/60000 (50%)]	Loss: 169.356277
-Train Epoch: 2 [40000/60000 (67%)]	Loss: 161.219177
-Train Epoch: 2 [50000/60000 (83%)]	Loss: 155.769821
-====> Epoch: 2 Average loss: 164.6240
+Train Epoch: 1 [0/60000 (0%)]	Loss: 542.627869
+Train Epoch: 1 [10000/60000 (17%)]	Loss: 210.317276
+Train Epoch: 1 [20000/60000 (33%)]	Loss: 186.174133
+Train Epoch: 1 [30000/60000 (50%)]	Loss: 194.145218
+Train Epoch: 1 [40000/60000 (67%)]	Loss: 187.440338
+Train Epoch: 1 [50000/60000 (83%)]	Loss: 186.376678
+====> Epoch: 1 Average loss: 197.6736
+====> Test set loss: 171.0257
+Train Epoch: 2 [0/60000 (0%)]	Loss: 170.385742
+Train Epoch: 2 [10000/60000 (17%)]	Loss: 162.513947
+Train Epoch: 2 [20000/60000 (33%)]	Loss: 160.054916
+Train Epoch: 2 [30000/60000 (50%)]	Loss: 158.194092
+Train Epoch: 2 [40000/60000 (67%)]	Loss: 149.647385
+Train Epoch: 2 [50000/60000 (83%)]	Loss: 144.748962
+====> Epoch: 2 Average loss: 153.3126
+====> Test set loss: 142.1215
+Train Epoch: 3 [0/60000 (0%)]	Loss: 149.698944
+Train Epoch: 3 [10000/60000 (17%)]	Loss: 140.085403
+Train Epoch: 3 [20000/60000 (33%)]	Loss: 138.817505
+Train Epoch: 3 [30000/60000 (50%)]	Loss: 136.967743
+Train Epoch: 3 [40000/60000 (67%)]	Loss: 137.792786
+Train Epoch: 3 [50000/60000 (83%)]	Loss: 134.401184
+====> Epoch: 3 Average loss: 138.2995
+====> Test set loss: 133.9106
 ```
 
 

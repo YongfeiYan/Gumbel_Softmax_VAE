@@ -26,6 +26,8 @@ parser.add_argument('--seed', type=int, default=1, metavar='S',
                     help='random seed (default: 1)')
 parser.add_argument('--log-interval', type=int, default=10, metavar='N',
                     help='how many batches to wait before logging training status')
+parser.add_argument('--hard', action='store_true', default=False,
+                    help='hard Gumbel softmax')
 
 args = parser.parse_args()
 args.cuda = not args.no_cuda and torch.cuda.is_available()
@@ -56,13 +58,17 @@ def gumbel_softmax_sample(logits, temperature):
     return F.softmax(y / temperature, dim=-1)
 
 
-def gumbel_softmax(logits, temperature):
+def gumbel_softmax(logits, temperature, hard=False):
     """
     ST-gumple-softmax
     input: [*, n_class]
     return: flatten --> [*, n_class] an one-hot vector
     """
     y = gumbel_softmax_sample(logits, temperature)
+    
+    if not hard:
+        return y.view(-1, latent_dim * categorical_dim)
+
     shape = y.size()
     _, ind = y.max(dim=-1)
     y_hard = torch.zeros_like(y).view(-1, shape[-1])
@@ -98,10 +104,10 @@ class VAE_gumbel(nn.Module):
         h5 = self.relu(self.fc5(h4))
         return self.sigmoid(self.fc6(h5))
 
-    def forward(self, x, temp):
+    def forward(self, x, temp, hard):
         q = self.encode(x.view(-1, 784))
         q_y = q.view(q.size(0), latent_dim, categorical_dim)
-        z = gumbel_softmax(q_y, temp)
+        z = gumbel_softmax(q_y, temp, hard)
         return self.decode(z), F.softmax(q_y, dim=-1).reshape(*q.size())
 
 
@@ -135,7 +141,7 @@ def train(epoch):
         if args.cuda:
             data = data.cuda()
         optimizer.zero_grad()
-        recon_batch, qy = model(data, temp)
+        recon_batch, qy = model(data, temp, args.hard)
         loss = loss_function(recon_batch, data, qy)
         loss.backward()
         train_loss += loss.item() * len(data)
@@ -160,7 +166,7 @@ def test(epoch):
     for i, (data, _) in enumerate(test_loader):
         if args.cuda:
             data = data.cuda()
-        recon_batch, qy = model(data, temp)
+        recon_batch, qy = model(data, temp, args.hard)
         test_loss += loss_function(recon_batch, data, qy).item() * len(data)
         if i % 100 == 1:
             temp = np.maximum(temp * np.exp(-ANNEAL_RATE * i), temp_min)
